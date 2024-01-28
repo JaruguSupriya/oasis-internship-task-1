@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Subjects Catalog</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            text-align: center;
+            background-color: #f0f8ff; 
+        }
+
+        select {
+            padding: 8px;
+            margin-bottom: 20px;
+        }
+
+        #subjectTableContainer {
+            margin: 0 auto; 
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="color: #2e8b57;">Engineering Subjects Catalog</h1>
+
+    <label for="branch" style="color: #2e8b57;">Select Branch:</label>
+    <select id="branch" onchange="showSubjects()">
+        <option value="" disabled selected>Select Branch</option>
+        <option value="cse">Computer Science Engineering</option>
+        <option value="ece">Electronics and Communication Engineering</option>
+        <option value="eee">Electrical and Electronics Engineering</option>
+        <option value="mech">Mechanical Engineering</option>
+    </select>
+
+    <div id="subjectTableContainer"></div>
+
+    <script>
+        function showSubjects() {
+            var branchSelect = document.getElementById("branch");
+            var selectedBranch = branchSelect.value;
+
+            var subjectTableContainer = document.getElementById("subjectTableContainer");
+            subjectTableContainer.innerHTML = ""; 
+
+            if (selectedBranch === "cse") {
+                generateSubjectsTable([
+                    { subject: 'Data Structures', author: 'Author 1', cost: 25 },
+                    { subject: 'Python Programming', author: 'Author 2', cost: 30 },
+                    { subject: 'Java Programming', author: 'Author 3', cost: 35 },
+                    { subject: 'Database Management', author: 'Author 4', cost: 40 },
+                    { subject: 'Web Development', author: 'Author 5', cost: 45 },
+                ]);
+            } else if (selectedBranch === "ece") {
+                generateSubjectsTable([
+                    { subject: 'Digital Signal Processing', author: 'Author 6', cost: 30 },
+                    { subject: 'Communication Systems', author: 'Author 7', cost: 35 },
+                    { subject: 'VLSI Design', author: 'Author 8', cost: 40 },
+                    { subject: 'Electromagnetic Fields', author: 'Author 9', cost: 25 },
+                    { subject: 'Embedded Systems', author: 'Author 10', cost: 45 },
+                ]);
+            } else if (selectedBranch === "eee") {
+                generateSubjectsTable([
+                    { subject: 'Power Systems', author: 'Author 11', cost: 35 },
+                    { subject: 'Control Systems', author: 'Author 12', cost: 40 },
+                    { subject: 'Renewable Energy', author: 'Author 13', cost: 30 },
+                    { subject: 'Electrical Machines', author: 'Author 14', cost: 25 },
+                    { subject: 'Digital Electronics', author: 'Author 15', cost: 45 },
+                ]);
+            } else if (selectedBranch === "mech") {
+                generateSubjectsTable([
+                    { subject: 'Thermodynamics', author: 'Author 16', cost: 40 },
+                    { subject: 'Fluid Mechanics', author: 'Author 17', cost: 35 },
+                    { subject: 'Mechanical Vibrations', author: 'Author 18', cost: 30 },
+                    { subject: 'Machine Design', author: 'Author 19', cost: 25 },
+                    { subject: 'Heat Transfer', author: 'Author 20', cost: 45 },
+                ]);
+            }
+        }
+
+        function generateSubjectsTable(subjects) {
+            var subjectTableContainer = document.getElementById("subjectTableContainer");
+            var tableHTML = `
+                <table>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Author</th>
+                        <th>Cost</th>
+                        <th>Action</th>
+                    </tr>`;
+
+            subjects.forEach(subject => {
+                tableHTML += `
+                    <tr>
+                        <td>${subject.subject}</td>
+                        <td>${subject.author}</td>
+                        <td>$${subject.cost}</td>
+                        <td><button onclick="addToCart('${subject.subject}', '${subject.author}', ${subject.cost})">Add to Cart</button></td>
+                    </tr>`;
+            });
+
+            tableHTML += `</table>`;
+            subjectTableContainer.innerHTML = tableHTML;
+        }
+
+        function addToCart(subject, author, cost) {
+            alert(`Added to Cart:\nSubject: ${subject}\nAuthor: ${author}\nCost: $${cost}`);
+           
+        }
+    </script>
+</body>
+
+</html>
